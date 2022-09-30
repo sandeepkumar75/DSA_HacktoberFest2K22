@@ -1,0 +1,93 @@
+package com.SERVEcreative.Sorting;
+
+
+
+class Person           // basically its a datatype
+{
+    private String firstName;
+    private String LastName;
+    int age;
+
+    public Person(int years, String First, String Last)
+    {
+      age=years;
+      firstName=First;
+      LastName=Last;
+    }
+
+    public void display()      // display
+    {
+
+        System.out.print("Lastname " + LastName );
+        System.out.print("First name " + firstName);
+        System.out.print("Age " + age);
+    }
+
+    public int getAge() // get last name
+    {
+        return age;
+    }
+
+}
+
+
+public class SortObject {
+ private Person [] people;
+ private int nelem;
+
+ public SortObject(int size) // constructor
+ {
+     people=new Person[size];
+     nelem=0;
+ }
+
+ void insert(int years, String first,String last)  // insertion
+ {
+     people[nelem]=new Person(years,first,last);
+     nelem++;
+ }
+
+ public void display()
+ {
+     for (int i=0;i<nelem;i++)
+     {
+         people[i].display();
+         System.out.println(" ");
+     }
+ }
+
+ public  void sortData()
+ {
+     for (int i=1; i<nelem;i++)
+     {
+         Person temp=people[i];
+         int j=i-1;
+         while (j>=0 && people[j].getAge()>temp.getAge())
+         {
+             people[j+1]=people[j];
+             j--;
+         }
+         people[j+1]=temp;
+     }
+ }
+
+
+
+
+    public static void main(String[] args) {
+
+     SortObject sortObject;
+     sortObject=new SortObject(100);
+     sortObject.insert(24,"Rahul","Kumar");
+     sortObject.insert(27,"Amit","Kumar");
+     sortObject.insert(22,"Manish","Kumar");
+     sortObject.insert(29,"Ravi","Kumar");
+
+    sortObject.display();
+    sortObject.sortData();
+
+        System.out.println("After sorting");
+    sortObject.display();
+    }
+
+}
