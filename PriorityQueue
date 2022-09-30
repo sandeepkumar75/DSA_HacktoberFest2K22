@@ -1,0 +1,71 @@
+package com.SERVEcreative.Queues;
+
+public class PriorityQ {
+
+    int priorityArray[];
+    int maxSize;
+    int nitems;
+
+    public PriorityQ(int s)
+    {
+        maxSize=s;
+        priorityArray=new int[maxSize];
+        nitems=0;
+    }
+
+    void insert(int value)
+    {
+       int i;
+        if (nitems==0)
+            priorityArray[nitems++]=value;
+        else
+        {
+            for ( i = nitems-1; i >= 0; i--) {
+
+                if (value>priorityArray[i])  // 12 7 4
+                {
+                    priorityArray[i+1]=priorityArray[i];
+
+                }
+                else
+                    break;
+
+            }
+            priorityArray[i+1]=value;
+            nitems++;
+        }
+
+    }
+
+    public int remove() // remove minimum item
+    {
+        return priorityArray[--nitems]; }
+    //-------------------------------------------------------------
+    public int peekMin() // peek at minimum item
+    { return priorityArray[nitems-1]; }
+    //-------------------------------------------------------------
+    public boolean isEmpty() // true if queue is empty
+    { return (nitems==0); }
+    //-------------------------------------------------------------
+    public boolean isFull() // true if queue is full
+    { return (nitems == maxSize); }
+
+
+    public static void main(String[] args) {
+
+        PriorityQ priorityQ=new PriorityQ(5);
+        priorityQ.insert(10);
+        priorityQ.insert(14);
+        priorityQ.insert(11);
+        priorityQ.insert(12);
+        priorityQ.insert(13);
+
+
+        while (!priorityQ.isEmpty())
+        {
+            int item=priorityQ.remove();
+            System.out.print(item+ "  ");
+        }
+        System.out.println(priorityQ.isEmpty());
+    }
+}
