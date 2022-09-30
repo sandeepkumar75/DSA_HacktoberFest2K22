@@ -1,0 +1,102 @@
+package com.GraphSeries;
+
+import java.util.*;
+
+public class DijKastraAlgo {
+    public static void main(String[] args) {
+
+        int n = 5;
+        ArrayList<ArrayList<Node>> adj = new ArrayList<>();
+        for (int i = 0 ; i <n; i++)
+        {
+            adj.add(new ArrayList<>());
+        }
+
+        adj.get(0).add(new Node(1, 2));
+        adj.get(1).add(new Node(0, 2));
+
+        adj.get(1).add(new Node(2, 4));
+        adj.get(2).add(new Node(1, 4));
+
+        adj.get(0).add(new Node(3, 1));
+        adj.get(3).add(new Node(0, 1));
+
+        adj.get(3).add(new Node(2, 3));
+        adj.get(2).add(new Node(3, 3));
+
+        adj.get(1).add(new Node(4, 5));
+        adj.get(4).add(new Node(1, 5));
+
+        adj.get(2).add(new Node(4, 1));
+        adj.get(4).add(new Node(2, 1));
+
+       DijKastraAlgo dijKastraAlgo= new DijKastraAlgo();
+       dijKastraAlgo.findMInCost(0,adj,n);
+
+    }
+
+    private  void findMInCost(int s, ArrayList<ArrayList<Node>> adj, int n) {
+
+        int dis[] = new int[n];
+        Arrays.fill(dis , Integer.MAX_VALUE);
+        dis[s] = 0;
+
+        PriorityQueue<Node>  pq = new PriorityQueue<Node>(n , new Node());
+        pq.add(new Node(s , 0));
+        while (!pq.isEmpty())
+        {
+            Node temp = pq.poll();
+
+            for(Node val : adj.get(temp.getV()))
+            {
+                if(dis[temp.v] + val.weight < dis[val.getV()])
+                {
+                    dis[val.getV()] =  dis[temp.getV()] + val.weight;
+                    pq.add(new Node(val.getV() ,dis[val.getV()]));
+                }
+            }
+        }
+
+        for (int val : dis)
+        {
+            System.out.print(val+"--> ");
+        }
+    }
+
+
+}
+class Node implements Comparator<Node>
+{
+    int v ;
+    int weight;
+
+    Node(int v , int weight)
+    {
+        this.v = v;
+        this.weight = weight;
+    }
+
+    Node(){}
+
+    public int getV() {
+        return v;
+    }
+
+    public void setV(int v) {
+        this.v = v;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    @Override
+    public int compare(Node o1, Node o2) {
+        return o1.weight - o2.weight;
+    }
+}
+
