@@ -1,0 +1,70 @@
+package com.SERVEcreative.Sorting;
+
+public class SelectionSort {
+    long [] arr;
+    int nelem;
+    public SelectionSort(int size)
+    {
+        arr=new long[size];
+        nelem=0;
+    }
+
+    public void insert(long value)
+    {
+        arr[nelem]=value;
+        nelem++;
+    }
+
+    public void SelectSrt()
+    {
+        int min;
+       for (int i=0 ;i<nelem; i++)
+       {
+           min=i;
+
+           for (int j=i+1; j<nelem ;j++)
+           {                              // 2 4 9 6 7 5 3 1
+
+               if (arr[min]>arr[j])
+               {
+                   min = j;
+
+               }
+           }
+           swap(i,min);
+       }
+    }
+
+    public void display()
+    {
+        for ( int i =0;i<nelem;i++)
+        {
+            System.out.println(arr[i]+" ");
+        }
+    }
+
+   public void  swap (int start, int end)
+    {
+        long temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        SelectionSort selectionSort;
+        selectionSort=new SelectionSort(100);
+        selectionSort.insert(100);
+        selectionSort.insert(300);
+        selectionSort.insert(500);
+        selectionSort.insert(10);
+        selectionSort.insert(60);
+        selectionSort.insert(900);
+        selectionSort.SelectSrt();
+        selectionSort.display();
+
+    }
+}
