@@ -1,0 +1,134 @@
+//Linked List implementation in C++
+//Author: Shourya Gupta 
+
+#include <iostream>
+using namespace std;
+class node{
+    public: 
+        int data;
+        node* next;
+};
+
+void display(node* &head){
+    if(head==NULL){
+        cout<<endl<<"The list is empty."<<endl;
+    }
+    else{
+        node* temp = head;
+        while(temp != NULL){
+            cout<<temp->data<<"->";
+            temp=temp->next;
+        }
+        cout<<"NULL"<<endl;
+    }
+        
+}
+
+void InsertAtBeg(node* &head, int d){
+    node* n = new node();
+    n->data = d;
+    n->next = head;
+    head=n;
+    cout<<"Element Added!"<<endl;
+}
+
+void InsertAtEnd(node* &head, int d){
+    node* n = new node();
+    n->data = d;
+    n->next = NULL;
+    if(head == NULL){
+        head = n;
+        cout<<"Element Added!"<<endl;
+    }
+    else{
+        node* temp = head;
+        while(temp->next != NULL){
+            temp = temp->next;
+        }
+        temp->next = n;
+        cout<<"Element Added!"<<endl;
+    }
+}
+
+void InsertAtMid(node* &head, int pos, int d){
+    if(head == NULL || (head->data != pos && head->next == NULL )){
+        cout<<pos<<" not found!"<<endl;
+    }
+    else{
+        node* n = new node;
+        n->data = d;
+        node* fast = head->next;
+        node* slow = head;
+        while (slow->data != pos){
+            fast=fast->next;
+            slow=slow->next;
+        }
+         
+        if(slow->data == pos){
+            n->next = fast;
+            slow->next = n;
+            cout<<"Element Added!"<<endl;
+        }
+
+        else if(fast == NULL){
+            cout<<pos<<" not found!"<<endl;
+        }
+    }
+}
+
+void DeleteBeg(node* &head){
+    if(head == NULL){
+        cout<<"List is empty!"<<endl;
+    }
+    
+    else{
+        node* temp = head;
+        head=temp->next;
+        free(temp);
+        cout<<"Element Deleted!"<<endl;
+    }
+}
+
+int main(){
+    node* head = NULL;
+    int choice,d;
+    char ans='y';
+    while(ans=='y'){
+        cout<<"1. Display Linked List"<<endl;
+        cout<<"2. Add an element to the beginning"<<endl;
+        cout<<"3. Add an element to the end"<<endl;
+        cout<<"4. Add an element at a given node"<<endl;
+        cout<<"5. Delete the first element"<<endl;
+        cout<<"6. Delete the last element"<<endl;
+        cout<<"7. Display the middle element"<<endl;
+        cout<<"8. Reverse the list"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>choice;
+        switch(choice){
+            case 1:
+                display(head);
+                break;
+            case 2:
+                cout<<"Enter the value to be added: ";
+                cin>>d;
+                InsertAtBeg(head, d);
+                break;
+            case 3:
+                cout<<"Enter the value to be added: ";
+                cin>>d;
+                InsertAtEnd(head, d);
+                break;
+            case 4:
+                int pos;
+                cout<<"Enter the value after which to be inserted: ";
+                cin>>pos;
+                cout<<"Enter the value to be added: ";
+                cin>>d;
+                InsertAtMid(head, pos, d);
+            case 5:
+                DeleteBeg(head);
+        }
+        cout<<endl<<"Do you want to choose again(y/n): ";
+        cin>>ans;
+    }
+}
