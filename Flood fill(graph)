@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool isvalid(vector<vector<int>>& image, int sr, int sc, int color,int n,int m,int oldcolor)
+    {
+        if(sr>=0 && sc>=0 && sr<n && sc<m && image[sr][sc]==oldcolor )
+            return true;
+        else
+            return false;
+    }
+    void solve(vector<vector<int>>& image, int sr, int sc, int color,int n,int m,int oldcolor)
+    {
+            image[sr][sc] = color;
+        if(isvalid(image , sr+1 , sc , color , n , m, oldcolor))
+        {
+            solve(image , sr+1 , sc ,color , n , m, oldcolor);
+        }
+         if(isvalid(image , sr-1 , sc , color , n , m , oldcolor))
+        {
+            solve(image , sr-1 , sc , color , n ,  m, oldcolor);
+        }
+         if(isvalid(image , sr , sc+1 , color , n , m , oldcolor))
+        {
+            solve(image ,sr , sc+1 , color , n , m , oldcolor);
+        }
+         if(isvalid(image , sr ,sc-1 , color , n , m , oldcolor))
+        {
+            solve(image , sr , sc-1 , color , n , m, oldcolor);
+        }
+        
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int n=image.size();
+        int m=image[0].size();
+        int oldcolor=image[sr][sc];
+        if(image[sr][sc]==color)
+            return image;
+        solve(image,sr,sc,color,n,m,oldcolor);
+        return image;
+    }
+};
