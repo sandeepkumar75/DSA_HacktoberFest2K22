@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+           int data;
+           node *next;
+};
+node* insert_node(node *start,int x)
+{
+           node *temp=new node;
+           temp->data=x;
+           temp->next=NULL;
+           if(start==NULL)
+                      return temp;
+           node *ptr=start;
+           while(ptr->next!=NULL)
+           {
+                      ptr=ptr->next;
+           }
+           ptr->next=temp;
+           return start;
+}
+void display(node *start)
+{
+           node *temp=start;
+           while(temp!=NULL)
+           {
+                      cout<<temp->data<<" ";
+                      temp=temp->next;
+           }
+}
+node* reverse_node(node *start)
+{
+           node *temp=start;
+           node *next=NULL,*prev=NULL;
+           while(temp!=NULL)
+           {
+                      next=temp->next;
+                      temp->next=prev;
+                      prev=temp;
+                      temp=next;
+           }
+           start=prev;
+           return start;
+}
+int main()
+{
+           node *sample=NULL;
+           sample=insert_node(sample,10);
+           sample=insert_node(sample,20);
+           sample=insert_node(sample,30);
+           sample=insert_node(sample,40);
+           sample=insert_node(sample,50);
+           cout<<"List:";
+           display(sample);
+           sample=reverse_node(sample);
+           cout<<"\nReverse List:";
+           display(sample);
+           return 0;
+}
