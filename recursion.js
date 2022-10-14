@@ -1,16 +1,25 @@
-//im javascript only in the time hhe. this is A simple example of a recursive function would be to count down the value to 1.
+// Factorial 
 
-function countdown(number) {
-  //display number
-  console.log(number);
-  
-  // decrese the number
-  const newNumber = number - 1;
-  
-  // case
-  if (newNumber > 0) {
-    countdown(newNumber)
-  }
+#include <iostream>
+using namespace std;
+
+int isFactorial(int);
+
+int main() {
+    int n, result;
+
+    cout << "Enter a non-negative number: ";
+    cin >> n;
+
+    result = isFactorial(n);
+    cout << "Factorial of " << n << " = " << result;
+    return 0;
 }
 
-countdown(3)
+int isFactorial(int n) {
+    if (n > 1) {
+        return n * isFactorial(n - 1);
+    } else {
+        return 1;
+    }
+}
