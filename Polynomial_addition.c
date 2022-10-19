@@ -1,4 +1,4 @@
-// polynomial addition using arrays
+
 #include <stdio.h>
 #include <stdlib.h>
 void createArray(int *array, int size)
